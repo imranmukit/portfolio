@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Imran Mukit – Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#0f0f0f;
+  --card:#f2f2f5;
+  --nav:rgba(255,255,255,.75);
+  --primary: #6a1b9a;
+  --accent: orange;
+}
+body.dark{
+  --bg:#0b0b10;
+  --text:#f5f5f5;
+  --card:#15151d;
+  --nav:rgba(15,15,20,.75);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* NAVIGATION */
+nav{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  max-width:1400px;
+  padding:16px 36px;
+  backdrop-filter:blur(16px);
+  background:var(--nav);
+  border-radius:26px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+}
+nav ul{display:flex;gap:36px;list-style:none}
+nav a{text-decoration:none;color:var(--text);font-weight:600}
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.mode-toggle{cursor:pointer; font-size: 1.2rem;}
+.menu-btn { display: none; cursor: pointer; font-size: 1.4rem; }
+
+/* SECTIONS COMMON */
+section{
+  padding:120px 8vw;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+section.reveal{opacity:0;transform:translateY(60px);transition:1s ease}
+section.reveal.show{opacity:1;transform:none}
+
+/* HOME SECTION */
+.home{
+  min-height:100vh;
+  position:relative;
+  justify-content:center;
+  text-align:center;
+}
+.home video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+.home::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.85);
+  z-index:-1;
+}
+body.dark .home::after{background:rgba(10,10,15,.85)}
+.home h1{font-size:clamp(2.5rem,6vw,7rem); margin-bottom: 10px;}
+#typing{font-size:1.6rem;font-weight:600; color: var(--primary); min-height: 1.6em;}
+
+/* ABOUT ME SECTION STYLES */
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  max-width: 1200px;
+  width: 100%;
+}
+.about-image-side {
+  flex: 1;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: 1.2s ease;
+}
+.about-text-side {
+  flex: 1.2;
+  text-align: left;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: 1.2s ease;
+}
+section.show .about-image-side,
+section.show .about-text-side {
+  opacity: 1;
+  transform: translateX(0);
+}
+.about-image-side img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 40px;
+  box-shadow: 20px 20px 0px var(--primary);
+  transition: 0.5s;
+}
+.about-image-side img:hover {
+  transform: translate(-10px, -10px);
+  box-shadow: 30px 30px 0px var(--accent);
+}
+.about-text-side h2 { font-size: 3rem; margin-bottom: 20px; }
+.about-text-side p { font-size: 1.1rem; line-height: 1.8; opacity: 0.8; margin-bottom: 20px; }
+
+/* ENDLESS SKILLS MARQUEE */
+.skills-wrap {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 60px;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+.skills-track {
+  display: flex;
+  gap: 60px;
+  width: max-content;
+  animation: skillsRun 30s linear infinite;
+}
+.skills-track:hover { animation-play-state: paused; }
+.skills-track span {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+@keyframes skillsRun {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 30px)); }
+}
+
+/* WORKS TIMELINE */
+.works-header { width: 100%; max-width: 1000px; text-align: left; margin-bottom: 40px; }
+.works-header span { color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.works-header h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin: 10px 0; }
+.gradient-text {
+    background: linear-gradient(90deg, var(--accent), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.timeline { position: relative; max-width: 1000px; width: 100%; margin: 0 auto; }
+.timeline::after {
+    content: ''; position: absolute; width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--primary), var(--accent), transparent);
+    top: 0; bottom: 0; left: 50%; margin-left: -1px;
+}
+.timeline-item { padding: 10px 40px; position: relative; width: 50%; opacity: 0; transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.timeline-item.left { left: 0; text-align: right; transform: translateX(-50px); }
+.timeline-item.right { left: 50%; text-align: left; transform: translateX(50px); }
+.timeline-item.show-item { opacity: 1; transform: translateX(0); }
+.timeline-item::after {
+    content: ''; position: absolute; width: 16px; height: 16px; right: -11px;
+    background-color: var(--bg); border: 3px solid var(--primary); top: 35px; border-radius: 50%; z-index: 1;
+}
+.right::after { left: -11px; }
+.work-box { padding: 25px; background: var(--card); border-radius: 20px; border: 1px solid rgba(128,128,128,0.1); transition: 0.3s ease; }
+.work-box:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+.work-info-row { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.left .work-info-row { flex-direction: row-reverse; }
+.work-img { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; }
+.work-title { font-size: 1.3rem; margin: 0; }
+.work-company { color: var(--accent); font-weight: 600; display: block; margin-bottom: 10px; }
+.work-desc { font-size: 0.95rem; opacity: 0.8; line-height: 1.6; }
+.status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; background: rgba(106, 27, 154, 0.1); border: 1px solid var(--primary); color: var(--primary); font-size: 0.75rem; margin-top: 15px; }
+
+/* BLOG GRID */
+.blog-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; width:100%; max-width:1200px; }
+.blog-card{ 
+  background:var(--card); 
+  padding:40px; 
+  border-radius:28px; 
+  text-align: left; 
+  opacity: 0; 
+  transform: scale(0.9) translateY(30px);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.blog-card.pop-in { opacity: 1; transform: scale(1) translateY(0); }
+.blog-card h3 { margin-bottom: 15px; color: var(--primary); }
+
+/* CONTACT */
+.contact-info{ display:flex; flex-direction:column; gap:20px; font-size:20px; }
+.contact-info a{ color:var(--text); text-decoration:none; font-weight:600; transition:0.3s; }
+.contact-info a:hover{ color:var(--accent); }
+
+/* --- RESPONSIVE FIXES --- */
+@media(max-width:992px){
+  .about-container { flex-direction: column; text-align: center; }
+  .about-text-side { text-align: center; }
+}
+
+@media(max-width:768px){
+  .menu-btn { display: block; }
+  nav ul {
+    position: absolute; top: 80px; left: 0; width: 100%; background: var(--card);
+    flex-direction: column; padding: 30px; border-radius: 20px; display: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  nav ul.active { display: flex; }
+
+  /* TIMELINE RESPONSIVE FIX */
+  .timeline::after { left: 31px; }
+  .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; text-align: left !important; left: 0 !important; transform: translateX(30px) !important; }
+  .timeline-item::after { left: 22px; right: auto; }
+  .left .work-info-row { flex-direction: row; }
+}
+</style>
+</head>
+<body class="dark">
+
+<nav>
+  <div style="font-weight: 900; letter-spacing: 1px;">IMRAN MUKIT</div>
+  <ul id="nav-list">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="mode-toggle" id="toggle"><i class="fas fa-sun"></i></div>
+    <div class="menu-btn" id="menu-btn"><i class="fas fa-bars"></i></div>
+  </div>
+</nav>
+
+<section class="home" id="home">
+  <video autoplay muted loop playsinline><source src="background.mp4" type="video/mp4"></video>
+  <h1>Hi, I’m Imran Mukit</h1>
+  <div id="typing"></div>
+  <p style="margin-top: 20px; max-width: 600px; opacity: 0.8;">I build large-scale, animated, modern web experiences with a focus on rhythm and motion.</p>
+
+  <div class="skills-wrap">
+    <div class="skills-track">
+      <span style="color:#e34c26"><i class="fab fa-html5"></i>HTML5</span>
+      <span style="color:#2965f1"><i class="fab fa-css3-alt"></i>CSS3</span>
+      <span style="color:#f7df1e"><i class="fab fa-js"></i>JavaScript</span>
+      <span style="color:#7952b3"><i class="fab fa-bootstrap"></i>Bootstrap</span>
+      <span style="color:#61dafb"><i class="fab fa-react"></i>React.js</span>
+      <span style="color:#31a8ff"><i class="fas fa-paint-brush"></i>Photoshop</span>
+      <span style="color:#10a37f"><i class="fas fa-robot"></i>AI Tools</span>
+      <span style="color:#ff9800"><i class="fas fa-layer-group"></i>UI Design</span>
+      <span style="color:#9c27b0"><i class="fas fa-bezier-curve"></i>UX Flow</span>
+      <span style="color:#e34c26"><i class="fab fa-html5"></i>HTML5</span>
+      <span style="color:#2965f1"><i class="fab fa-css3-alt"></i>CSS3</span>
+      <span style="color:#f7df1e"><i class="fab fa-js"></i>JavaScript</span>
+      <span style="color:#7952b3"><i class="fab fa-bootstrap"></i>Bootstrap</span>
+      <span style="color:#61dafb"><i class="fab fa-react"></i>React.js</span>
+      <span style="color:#31a8ff"><i class="fas fa-paint-brush"></i>Photoshop</span>
+      <span style="color:#10a37f"><i class="fas fa-robot"></i>AI Tools</span>
+      <span style="color:#ff9800"><i class="fas fa-layer-group"></i>UI Design</span>
+      <span style="color:#9c27b0"><i class="fas fa-bezier-curve"></i>UX Flow</span>
+    </div>
+  </div>
+</section>
+
+<section id="works" class="reveal">
+  <div class="works-header">
+    <span><i class="fas fa-briefcase"></i> // Experience</span>
+    <h2>The Arts I <span class="gradient-text">Know</span></h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item left">
+      <div class="work-box">
+        <div class="work-info-row">
+          <img src="work1.png" alt="Logo" class="work-img">
+          <div><h3 class="work-title">Front-End Development</h3><span class="work-company">Expert</span></div>
+        </div>
+        <p class="work-desc">Leading full-stack initiatives using React, Node, and AWS.</p>
+        <div class="status-badge">• Experienced</div>
+      </div>
+    </div>
+    <div class="timeline-item right">
+      <div class="work-box">
+        <div class="work-info-row">
+          <img src="work2.jpg" alt="Logo" class="work-img">
+          <div><h3 class="work-title">Graphics Design</h3><span class="work-company">Photoshop</span></div>
+        </div>
+        <p class="work-desc">Designing pixels, shaping ideas.</p>
+      </div>
+    </div>
+    <div class="timeline-item left">
+      <div class="work-box">
+        <div class="work-info-row">
+          <img src="work3.png" alt="Logo" class="work-img">
+          <div><h3 class="work-title">Wordpress</h3><span class="work-company">Beginner</span></div>
+        </div>
+        <p class="work-desc">Crafting simple, clean websites as I grow.</p>
+      </div>
+    </div>
+    <div class="timeline-item right">
+      <div class="work-box">
+        <div class="work-info-row">
+          <img src="work4.png" alt="Logo" class="work-img">
+          <div><h3 class="work-title">Web Game Development</h3><span class="work-company">Expert</span></div>
+        </div>
+        <p class="work-desc">Games using HTML CSS & JS.</p>
+      </div>
+    </div>
+    <div class="timeline-item left">
+      <div class="work-box">
+        <div class="work-info-row">
+          <img src="work5.jpg" alt="Logo" class="work-img">
+          <div><h3 class="work-title">Ai contents</h3><span class="work-company">Creative</span></div>
+        </div>
+        <p class="work-desc">Generative AI solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="blog" class="reveal">
+  <h2 class="gradient-text" style="margin-bottom: 40px; font-size: 2.5rem;">Insights & Blog</h2>
+  <div class="blog-grid">
+    <div class="blog-card"><h3>Why I Love Front-End Development</h3><p>Front-end development is more than just code — it’s art, design, and problem-solving combined.</p></div>
+    <div class="blog-card"><h3>Building Interactive Experiences</h3><p>I focus on modern technologies like React to build interactive and responsive websites.</p></div>
+    <div class="blog-card"><h3>From Design to Code</h3><p>Turning creative designs into functional websites ensures seamless browsing experiences.</p></div>
+  </div>
+</section>
+
+<section id="about" class="reveal">
+  <div class="about-container">
+    <div class="about-image-side"><img src="about-me.jpg" alt="Imran Mukit"></div>
+    <div class="about-text-side">
+      <span style="color:var(--primary); font-weight:700; text-transform:uppercase;">// Who am I</span>
+      <h2>About <span class="gradient-text">Me</span></h2>
+      <p>I am a passionate Front-End Developer with a keen eye for aesthetic design and smooth user experiences.</p>
+      <div style="margin-top:20px;"><a href="mailto:imranmukit.zg@gmail.com" style="background:var(--primary); color:#fff; padding:12px 30px; border-radius:30px; text-decoration:none; font-weight:600;">Let's Talk</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <h2 class="gradient-text" style="margin-bottom: 30px;">Let's Connect</h2>
+  <div class="contact-info">
+    <div><i class="fas fa-envelope"></i> <a href="mailto:imranmukit.zg@gmail.com">Email</a></div>
+    <div><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/imran-mukit-821a053a9/">LinkedIn</a></div>
+  </div>
+</section>
+
+<script>
+// Menu Toggle
+const menuBtn = document.getElementById('menu-btn');
+const navList = document.getElementById('nav-list');
+menuBtn.onclick = () => {
+  navList.classList.toggle('active');
+  menuBtn.innerHTML = navList.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+}
+
+const toggle=document.getElementById('toggle');
+toggle.onclick=()=>{
+  document.body.classList.toggle('dark');
+  toggle.innerHTML=document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+
+const txt="Frontend Developer & UI/UX Designer";
+let i=0;
+const t=document.getElementById('typing');
+function type(){ if(i<txt.length){ t.innerHTML+=txt[i++]; setTimeout(type,70); } }
+type();
+
+window.addEventListener('scroll',()=>{
+  document.querySelectorAll('.reveal').forEach(sec=>{ if(sec.getBoundingClientRect().top<window.innerHeight-100)sec.classList.add('show'); });
+  document.querySelectorAll('.timeline-item').forEach(item=>{ if(item.getBoundingClientRect().top<window.innerHeight-50) item.classList.add('show-item'); });
+  document.querySelectorAll('.blog-card').forEach((card, index) => {
+    if (card.getBoundingClientRect().top < window.innerHeight - 80) {
+      setTimeout(() => card.classList.add('pop-in'), index * 150);
+    }
+  });
+});
+</script>
+</body>
+</html>
