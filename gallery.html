@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery Showcase | Imran Mukit</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#0f0f0f;
+  --card:#f2f2f5;
+  --nav:rgba(255,255,255,.75);
+  --primary: #6a1b9a;
+  --accent: orange;
+  --gradient: linear-gradient(135deg, #6a1b9a, orange);
+}
+body.dark{
+  --bg:#0b0b10;
+  --text:#f5f5f5;
+  --card:#15151d;
+  --nav:rgba(15,15,20,.75);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  transition: background 0.3s ease;
+}
+
+/* NAVIGATION */
+nav{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  max-width:1400px;
+  padding:12px 30px;
+  backdrop-filter:blur(16px);
+  background:var(--nav);
+  border-radius:26px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+  border: 1px solid rgba(128,128,128,0.1);
+}
+nav ul{display:flex;gap:36px;list-style:none}
+nav a{text-decoration:none;color:var(--text);font-weight:600; transition: 0.3s;}
+nav a:hover{color: var(--primary);}
+
+.nav-right{ display: flex; align-items: center; gap: 20px; }
+.mode-toggle{cursor:pointer; font-size: 1.2rem;}
+.menu-toggle{display: none; cursor: pointer; font-size: 1.2rem;}
+
+/* HEADER */
+.gallery-header {
+  padding: 160px 5vw 40px;
+  text-align: center;
+}
+.gallery-header h1 { font-size: clamp(2.2rem, 6vw, 4rem); margin-bottom: 20px; }
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* FILTERS */
+.filter-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+.filter-btn {
+  padding: 10px 24px;
+  border-radius: 30px;
+  border: 1px solid rgba(128,128,128,0.2);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.filter-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 10px 20px rgba(106, 27, 154, 0.3);
+}
+
+/* GRID - Optimized for all screens */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
+  gap: 30px;
+  padding: 0 5vw 100px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.gallery-card {
+  background: var(--card);
+  border-radius: 28px;
+  overflow: hidden;
+  transition: 0.5s;
+  border: 1px solid rgba(128,128,128,0.1);
+  animation: cardFade 0.6s ease forwards;
+}
+@keyframes cardFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.gallery-card:hover { transform: translateY(-12px); border-color: var(--primary); }
+.img-box { width: 100%; height: 280px; background: #222; overflow: hidden; position: relative; }
+.img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.7s; }
+.gallery-card:hover img { transform: scale(1.1); }
+
+.card-meta { padding: 25px; }
+.card-meta span { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+.card-meta h3 { margin-top: 8px; font-size: 1.3rem; font-weight: 700; }
+
+.hidden { display: none; }
+
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+@media (max-width: 992px) {
+  nav { width: 95%; padding: 12px 20px; }
+  nav ul { gap: 20px; }
+}
+
+@media(max-width:768px){
+  .menu-toggle { display: block; }
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: var(--card);
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(128,128,128,0.1);
+  }
+  nav ul.active { display: flex; }
+  .gallery-header { padding-top: 120px; }
+  .img-box { height: 220px; }
+}
+</style>
+</head>
+<body class="dark">
+
+<nav>
+  <div style="font-weight: 900; letter-spacing: 1px;">IMRAN MUKIT</div>
+  <ul id="nav-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#works">Works</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="index.html#blog">Blog</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="mode-toggle" id="toggle"><i class="fas fa-sun"></i></div>
+    <div class="menu-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
+  </div>
+</nav>
+
+<div class="gallery-header">
+  <h1>Project <span class="gradient-text">Showcase</span></h1>
+  <div class="filter-container">
+    <button class="filter-btn active" data-filter="all">All Projects</button>
+    <button class="filter-btn" data-filter="web">Web Design</button>
+    <button class="filter-btn" data-filter="game">Game Development</button>
+    <button class="filter-btn" data-filter="graphics">Graphics Design</button>
+  </div>
+</div>
+
+<div class="gallery-grid" id="galleryGrid">
+  <div class="gallery-card" data-category="web">
+    <div class="img-box"><img src="project1.png" alt="Web Design"></div>
+    <div class="card-meta"><span>Web Design</span><h3>Portfolio Website Demo</h3></div>
+  </div>
+
+  <div class="gallery-card" data-category="game">
+    <div class="img-box"><img src="project3.png" alt="Game Dev"></div>
+    <div class="card-meta"><span>Game Development</span><h3>Alphabates Running Game</h3></div>
+  </div>
+
+  <div class="gallery-card" data-category="graphics">
+    <div class="img-box"><img src="project5.jpg" alt="Graphics"></div>
+    <div class="card-meta"><span>Graphics Design</span><h3>Banner For Ozelva</h3></div>
+  </div>
+
+  <div class="gallery-card" data-category="web">
+    <div class="img-box"><img src="project2.png" alt="Web Design"></div>
+    <div class="card-meta"><span>Web Design</span><h3>E-commerce Interior UI</h3></div>
+  </div>
+
+  <div class="gallery-card" data-category="game">
+    <div class="img-box"><img src="project4.png" alt="Game Dev"></div>
+    <div class="card-meta"><span>Game Development</span><h3>Color Block Catch</h3></div>
+  </div>
+</div>
+
+<script>
+// Dark Mode Toggle Logic
+const toggle=document.getElementById('toggle');
+toggle.onclick=()=>{
+  document.body.classList.toggle('dark');
+  toggle.innerHTML=document.body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+
+// Mobile Menu Toggle Logic
+const menuBtn = document.getElementById('menu-btn');
+const navMenu = document.getElementById('nav-menu');
+
+menuBtn.onclick = () => {
+  navMenu.classList.toggle('active');
+  menuBtn.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+}
+
+// Close menu when a link is clicked
+document.querySelectorAll('#nav-menu a').forEach(link => {
+  link.onclick = () => {
+    navMenu.classList.remove('active');
+    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+  }
+});
+
+// Category Filter Logic
+const filterBtns = document.querySelectorAll('.filter-btn');
+const galleryCards = document.querySelectorAll('.gallery-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const selectedCategory = btn.getAttribute('data-filter');
+
+    galleryCards.forEach(card => {
+      if (selectedCategory === 'all' || card.getAttribute('data-category') === selectedCategory) {
+        card.classList.remove('hidden');
+        card.style.animation = 'none';
+        card.offsetHeight; 
+        card.style.animation = 'cardFade 0.6s ease forwards';
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
