@@ -120,11 +120,26 @@ body.dark .home::after{background:rgba(10,10,15,.85)}
   max-width: 1200px;
   width: 100%;
 }
-  .talk-btn:hover {
-  background: #8e24aa; /* A slightly lighter, vibrant purple */
+  .talk-btn {
+  display: inline-block;
+  background: var(--primary); /* Your original purple */
+  color: #fff;
+  padding: 12px 35px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(106, 27, 154, 0.2);
+  cursor: pointer;
+}
+
+.talk-btn:hover {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
   transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(142, 36, 170, 0.6);
-  filter: brightness(1.2);
+  box-shadow: 0 8px 25px rgba(106, 27, 154, 0.4);
 }
 .about-image-side {
   flex: 1;
@@ -428,6 +443,7 @@ window.addEventListener('scroll',()=>{
 </script>
 </body>
 </html>
+
 
 
 
