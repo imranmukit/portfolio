@@ -24,27 +24,6 @@ body.dark{
   --card:#15151d;
   --nav:rgba(15,15,20,.75);
 }
-  nav ul li a {
-  position: relative;
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-nav ul li a::after {
-  content: '';
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--primary);
-  transition: width 0.3s ease;
-}
-
-nav ul li a:hover::after {
-  width: 100%;
-}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -76,6 +55,52 @@ nav{
 nav ul{display:flex;gap:36px;list-style:none}
 nav a{text-decoration:none;color:var(--text);font-weight:600; transition: 0.3s;}
 nav a:hover{color: var(--primary);}
+nav ul li a {
+  position: relative;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+/* LET'S TALK BUTTON HOVER EFFECT */
+.talk-btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 35px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(106, 27, 154, 0.3);
+  cursor: pointer;
+  border: none;
+}
+
+.talk-btn:hover {
+  transform: translateY(-8px) scale(1.08); /* Lifts the button up */
+  background: var(--accent); /* Changes to Orange */
+  box-shadow: 0 15px 30px rgba(255, 165, 0, 0.4); /* Glowing orange shadow */
+  color: #fff;
+}
+
+.talk-btn:active {
+  transform: translateY(-2px) scale(0.98); /* Press down effect */
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
 
 .nav-right{ display: flex; align-items: center; gap: 20px; }
 .mode-toggle{cursor:pointer; font-size: 1.2rem;}
@@ -151,6 +176,77 @@ nav a:hover{color: var(--primary);}
 
 .hidden { display: none; }
 
+/* CERTIFICATES SECTION */
+.certificates-section {
+  padding: 120px 5vw 100px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.certificates-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.certificates-header h2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 15px;
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 30px;
+}
+
+.certificate-card {
+  background: var(--card);
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(128,128,128,0.1);
+  transition: 0.5s;
+}
+
+.certificate-card:hover {
+  transform: translateY(-12px);
+  border-color: var(--primary);
+}
+
+.certificate-img {
+  height: 240px;
+  overflow: hidden;
+}
+
+.certificate-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.6s;
+}
+
+.certificate-card:hover img {
+  transform: scale(1.08);
+}
+
+.certificate-info {
+  padding: 22px;
+}
+
+.certificate-info span {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.certificate-info h3 {
+  margin-top: 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+
 /* MEDIA QUERIES FOR RESPONSIVENESS */
 @media (max-width: 992px) {
   nav { width: 95%; padding: 12px 20px; }
@@ -185,7 +281,7 @@ nav a:hover{color: var(--primary);}
   <div style="font-weight: 900; letter-spacing: 1px;">IMRAN MUKIT</div>
   <ul id="nav-menu">
     <li><a href="index.html">Home</a></li>
-    <li><a href="index.html#works">Works</a></li>
+    <li><a href="index.html#works">Skills</a></li>
     <li><a href="#">Gallery</a></li>
     <li><a href="index.html#blog">Blog</a></li>
     <li><a href="index.html#about">About</a></li>
@@ -233,6 +329,48 @@ nav a:hover{color: var(--primary);}
     <div class="card-meta"><span>Game Development</span><h3>Color Block Catch</h3></div>
   </div>
 </div>
+
+<section class="certificates-section" id="certificates">
+  <div class="certificates-header">
+    <h2>My <span class="gradient-text">Certificates</span></h2>
+  </div>
+
+  <div class="certificates-grid">
+
+    <div class="certificate-card">
+      <div class="certificate-img">
+        <img src="c1.png" alt="Certificate">
+      </div>
+      <div class="certificate-info">
+        <span>Promp Engineering</span>
+        <h3>Microsoft - Github Copilot</h3>
+      </div>
+    </div>
+
+    <div class="certificate-card">
+      <div class="certificate-img">
+        <img src="c2.png" alt="Certificate">
+      </div>
+      <div class="certificate-info">
+        <span>Generative AI</span>
+        <h3>Google Cloud</h3>
+      </div>
+    </div>
+
+    <div class="certificate-card">
+      <div class="certificate-img">
+        <img src="c3.png" alt="Certificate">
+      </div>
+      <div class="certificate-info">
+        <span>Full-Stack Development</span>
+        <h3>Introduction</h3>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
 
 <script>
 // Dark Mode Toggle Logic
@@ -285,5 +423,4 @@ filterBtns.forEach(btn => {
 </script>
 
 </body>
-
 </html>
